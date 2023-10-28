@@ -30,7 +30,8 @@ const authOptions: AuthOptions = {
           },
         });
         if (!user || !user.hashedPassword) {
-          throw new Error("Email does not exist");
+          return null;
+          //   throw new Error("Email does not exist");
         }
 
         const isCorrectPassword = await compare(
@@ -39,7 +40,9 @@ const authOptions: AuthOptions = {
         );
 
         if (!isCorrectPassword) {
-          throw new Error("Incorrect password");
+          return null;
+
+          //   throw new Error("Incorrect password");
         }
         return user;
       },
@@ -53,9 +56,11 @@ const authOptions: AuthOptions = {
   session: {
     strategy: "jwt",
   },
+
   jwt: {
     secret: process.env.NEXTAUTH_JWT_SECRET,
   },
+
   secret: process.env.NEXTAUTH_SECRET,
 };
 

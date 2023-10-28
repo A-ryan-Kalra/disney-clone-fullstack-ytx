@@ -5,6 +5,9 @@ import React, { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import { Icon } from "@iconify/react";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { signIn } from "next-auth/react";
+import { compare } from "bcrypt";
+import { useRouter } from "next/router";
 
 type ErrorCheck = {
   [key: string]: any;
@@ -17,13 +20,14 @@ function Auth() {
   const [variant, setVariant] = useState("login");
   const [username, setUsername] = useState("");
   const [errorCheck, setErrorCheck] = useState<ErrorCheck>();
+  const [flag, setFlag] = useState(false);
+  const router = useRouter();
 
   const notify = () => {
     toast("Please fill up the details given below before proceed", {
       position: toast.POSITION.TOP_CENTER,
     });
   };
-  console.log(errorCheck?.response?.data);
 
   const register = useCallback(
     async (e: any) => {
@@ -34,14 +38,38 @@ function Auth() {
           username,
           password,
         });
-        // console.log(user);
       } catch (error) {
         console.log(error);
-        console.log("error");
+
         setErrorCheck(error!);
       }
     },
     [email, username, password]
+  );
+
+  const login = useCallback(
+    async (e: any) => {
+      e.preventDefault();
+
+      try {
+        const result = await signIn("credentials", {
+          email: email,
+          password: password,
+          // callbackUrl: "/profiles",
+          redirect: false,
+        });
+        console.log(result);
+        if (result?.status !== 200) {
+          setFlag(true);
+          console.log("Error");
+        } else {
+          router.push("/profiles");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [email, password]
   );
 
   const toggleVariant = useCallback(() => {
@@ -49,6 +77,8 @@ function Auth() {
     setEmail("");
     setPassword("");
     setUsername("");
+    setFlag(false);
+    setErrorCheck([]);
   }, [email, password, username]);
 
   return (
@@ -71,7 +101,10 @@ function Auth() {
         <h2 className="text-white text-4xl font-medium pb-8">
           {variant === "login" ? "Sign in" : "Register"}
         </h2>
-        <form className="flex flex-col gap-4" onSubmit={(e) => register(e)}>
+        <form
+          className="flex flex-col gap-4"
+          onSubmit={(e) => (variant === "login" ? login(e) : register(e))}
+        >
           <div className="flex flex-col gap-4 relative bottom-5">
             {variant !== "login" && (
               <Input
@@ -104,8 +137,13 @@ function Auth() {
             />
           </div>
           {errorCheck?.response?.status === 422 && (
-            <p className="absolute top-[290px] text-[14px] text-red-500 left-[80px] ">
+            <p className="absolute top-[290px] duration-200 transform transition-all ease-out text-[14px] text-red-500 left-[80px] ">
               {errorCheck?.response?.data?.error}
+            </p>
+          )}
+          {flag && (
+            <p className="absolute top-[225px] duration-200 transform transition-all ease-out text-[14px] text-red-500 left-[80px] ">
+              Email or Password entered wrong
             </p>
           )}
           <button
