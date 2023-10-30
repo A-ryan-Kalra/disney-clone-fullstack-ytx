@@ -5,9 +5,14 @@ import prismadb from "@/lib/prismadb";
 import { compare } from "bcrypt";
 import NextAuth from "next-auth/next";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import GoogleProvider from "next-auth/providers/google";
 
-const authOptions: AuthOptions = {
+export const authOptions: AuthOptions = {
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECREt as string,
+    }),
     Credentials({
       name: "Credentials",
       credentials: {
@@ -55,6 +60,7 @@ const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prismadb),
   session: {
     strategy: "jwt",
+    maxAge: 1 * 60 * 60, // set to 60 minutes
   },
 
   jwt: {

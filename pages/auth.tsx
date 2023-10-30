@@ -5,9 +5,10 @@ import React, { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import { Icon } from "@iconify/react";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import { compare } from "bcrypt";
 import { useRouter } from "next/router";
+import { NextPageContext } from "next";
 
 type ErrorCheck = {
   [key: string]: any;
@@ -155,7 +156,12 @@ function Auth() {
         </form>
         <p className="text-white text-center py-2">Or</p>
         <div className="w-full group relative ">
-          <div className="flex group justify-center relative  items-center rounded-full transform duration-500 ease-out transition cursor-pointer  w-[100px]  mx-auto  group-hover:bg-indigo-500">
+          <div
+            className="flex group justify-center relative  items-center rounded-full transform duration-500 ease-out transition cursor-pointer  w-[100px]  mx-auto  group-hover:bg-indigo-500"
+            onClick={() => {
+              signIn("google", { callbackUrl: "/profiles" });
+            }}
+          >
             <button className="bg-white rounded-full">
               <Icon
                 width={38}
@@ -182,3 +188,20 @@ function Auth() {
 }
 
 export default Auth;
+
+export async function getServerSideProps(context: NextPageContext) {
+  const session = await getSession(context);
+  // console.log("hello");
+  // console.log(session);
+  // console.log("hello");
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  return { props: {} };
+}
