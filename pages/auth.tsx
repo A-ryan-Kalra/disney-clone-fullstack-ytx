@@ -6,7 +6,6 @@ import { Icon } from "@iconify/react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { getSession, signIn } from "next-auth/react";
-import { compare } from "bcrypt";
 import { useRouter } from "next/router";
 import { NextPageContext } from "next";
 import Toast, { showToast } from "@/components/Toast";

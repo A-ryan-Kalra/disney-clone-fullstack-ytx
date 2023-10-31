@@ -1,8 +1,8 @@
-import React, { useCallback, useMemo } from "react";
 import { Icon } from "@iconify/react";
 import useFavorites from "@/hooks/useFavorites";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import axios from "axios";
+import { useCallback, useMemo } from "react";
 
 interface FavoriteButtonProps {
   movieId: string;

@@ -1,6 +1,4 @@
 import useBillboard from "@/hooks/useBillboard";
-import serverAuth from "@/lib/serverAuth";
-import { NextRequest, NextResponse } from "next/server";
 import React from "react";
 import { Icon } from "@iconify/react";
 import PlayNow from "./PlayNow";
