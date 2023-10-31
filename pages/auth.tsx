@@ -3,12 +3,12 @@ import Input from "@/components/Input";
 import Image from "next/image";
 import React, { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import { Icon } from "@iconify/react";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import axios from "axios";
 import { getSession, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { NextPageContext } from "next";
-// import Toast, { showToast } from "@/components/Toast";
+import Toast, { showToast } from "@/components/Toast";
 
 type ErrorCheck = {
   [key: string]: any;
@@ -24,11 +24,11 @@ function Auth() {
   const [flag, setFlag] = useState(false);
   const router = useRouter();
 
-  // const notify = () => {
-  //   showToast("Please fill up the details given below before proceed", {
-  //     position: toast.POSITION.BOTTOM_CENTER,
-  //   });
-  // };
+  const notify = () => {
+    showToast("Please fill up the details given below before proceed", {
+      position: toast.POSITION.BOTTOM_CENTER,
+    });
+  };
 
   const register = useCallback(
     async (e: any) => {
@@ -84,13 +84,16 @@ function Auth() {
 
   return (
     <div className="relative top-0 bg-no-repeat bg-cover bg-fixed bg-[url('/images/hero-background.jpg')] w-screen h-screen ">
-      {/* <Toast /> */}
+      <Toast />
 
       <nav className="flex flex-row items-center bg-[#050614] justify-between px-20">
         <div className="relative h-20 w-20">
           <Image src={"/images/logo.svg"} className="" fill alt="logo" />
         </div>
-        <button className="rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-white    ">
+        <button
+          className="rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-white    "
+          onClick={notify}
+        >
           <span className="absolute w-64 h-0 transition-all duration-500 group-hover:origin-center origin-center rotate-90 -translate-x-[98px]   bg-white top-2/3 group-hover:h-64 group-hover:-translate-y-32 ease-in-out"></span>
           <span className="relative text-white transition duration-300 group-hover:text-black ease">
             Sign up
