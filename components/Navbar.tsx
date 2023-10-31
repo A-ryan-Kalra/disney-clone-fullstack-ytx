@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { Icon } from "@iconify/react";
 import NavIcons from "./NavIcons";
+import { signOut } from "next-auth/react";
 
 function Navbar() {
   return (
@@ -21,6 +22,7 @@ function Navbar() {
             className="cursor-pointer rounded-full"
             fill
             alt="logo"
+            onClick={() => signOut()}
           />
         </div>
         <NavIcons
