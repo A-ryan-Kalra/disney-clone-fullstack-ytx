@@ -1,10 +1,10 @@
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
-export const showToast = (message: string, type: any) => {
-  toast(message, { type });
-};
+// export const showToast = (message: string, type: any) => {
+//   toast(message, { type });
+// };
 
-export default function Toast() {
-  return <ToastContainer />;
-}
+// export default function Toast() {
+//   return <ToastContainer />;
+// }
