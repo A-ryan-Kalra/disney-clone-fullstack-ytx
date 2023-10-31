@@ -9,6 +9,7 @@ import { getSession, signIn } from "next-auth/react";
 import { compare } from "bcrypt";
 import { useRouter } from "next/router";
 import { NextPageContext } from "next";
+import Toast, { showToast } from "@/components/Toast";
 
 type ErrorCheck = {
   [key: string]: any;
@@ -25,8 +26,8 @@ function Auth() {
   const router = useRouter();
 
   const notify = () => {
-    toast("Please fill up the details given below before proceed", {
-      position: toast.POSITION.TOP_CENTER,
+    showToast("Please fill up the details given below before proceed", {
+      position: toast.POSITION.BOTTOM_CENTER,
     });
   };
 
@@ -84,6 +85,8 @@ function Auth() {
 
   return (
     <div className="relative top-0 bg-no-repeat bg-cover bg-fixed bg-[url('/images/hero-background.jpg')] w-screen h-screen ">
+      <Toast />
+
       <nav className="flex flex-row items-center bg-[#050614] justify-between px-20">
         <div className="relative h-20 w-20">
           <Image src={"/images/logo.svg"} className="" fill alt="logo" />
