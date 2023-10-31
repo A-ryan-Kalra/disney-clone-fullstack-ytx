@@ -9,6 +9,7 @@ import { getSession, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { NextPageContext } from "next";
 import Toast, { showToast } from "@/components/Toast";
+import { log } from "console";
 
 type ErrorCheck = {
   [key: string]: any;
@@ -39,6 +40,7 @@ function Auth() {
           username,
           password,
         });
+        login(e);
       } catch (error) {
         console.log(error);
 
