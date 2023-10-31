@@ -8,19 +8,24 @@ import Billboard from "@/components/Billboard";
 import MovieList from "@/components/MovieList";
 import useMovie from "@/hooks/useMovie";
 import useMovieList from "@/hooks/useMovieList";
+import useFavorites from "@/hooks/useFavorites";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const { data: movie = [] } = useMovieList();
+  const { data: favorites = [], mutate } = useFavorites();
   // console.log(movie);
   return (
-    <div className="flex bg-[#0F1014]">
+    <div className="flex bg-[#0F1014]  ">
       <Navbar />
       {/* <button onClick={() => signOut()}>signOut</button> */}
-      <div className="pb-40">
+      <div className="pb-60 ">
         <Billboard />
-        <MovieList title="Trending Now" data={movie} />
+        <div className="flex flex-col gap-10">
+          <MovieList title="Trending Now" data={movie} />
+          <MovieList title="My Likes" data={favorites} />
+        </div>
       </div>
     </div>
   );
