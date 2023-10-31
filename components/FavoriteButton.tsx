@@ -9,7 +9,6 @@ interface FavoriteButtonProps {
 }
 
 function FavoriteButton({ movieId }: FavoriteButtonProps) {
-  //   console.log(movieId);
   const { mutate: mutateFavorites } = useFavorites();
   const { data: currentUser, mutate } = useCurrentUser();
 
@@ -26,7 +25,7 @@ function FavoriteButton({ movieId }: FavoriteButtonProps) {
       response = await axios.post("/api/favorite", { movieId });
     }
     const updateFavoriteIds = response?.data?.favoriteIds;
-    // console.log(updateFavoriteIds);
+
     mutate({
       ...currentUser,
       favoriteIds: updateFavoriteIds,
