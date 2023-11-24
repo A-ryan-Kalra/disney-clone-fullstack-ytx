@@ -7,14 +7,14 @@ import { signOut } from "next-auth/react";
 function Navbar() {
   return (
     <div className="sticky left-0 top-0 bg-[#0F1014] h-screen w-[100px] flex-col  flex ">
-      <div className="relative w-[60px] h-[60px] mx-auto top-5 ">
+      {/* <div className="relative w-[60px] h-[60px] mx-auto top-5 ">
         <Image
           src={"/images/disney+hotstar.svg"}
           className="object-contain"
           fill
           alt="logo"
         />
-      </div>
+      </div> */}
       <nav className="relative flex flex-col top-[31%] justify-between items-center gap-10 translate-y-[-31%]">
         <div className="relative w-7 rounded-full h-7">
           <Image

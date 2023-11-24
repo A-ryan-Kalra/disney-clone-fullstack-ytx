@@ -88,10 +88,7 @@ function Auth() {
     <div className="relative top-0 bg-no-repeat bg-cover bg-fixed bg-[url('/images/hero-background.jpg')] w-screen h-screen ">
       <Toast />
 
-      <nav className="flex flex-row items-center bg-[#050614] justify-between px-20">
-        <div className="relative h-20 w-20">
-          <Image src={"/images/logo.svg"} className="" fill alt="logo" />
-        </div>
+      <nav className="flex flex-row items-center bg-[#050614] justify-end px-20 p-2">
         <button
           className="rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-white    "
           onClick={notify}
