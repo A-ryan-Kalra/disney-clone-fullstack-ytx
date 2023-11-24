@@ -5,7 +5,7 @@ import PlayNow from "./PlayNow";
 
 function Billboard() {
   const { data } = useBillboard();
-  // console.log(data);
+  console.log(data);
   return (
     <div className="bg-[#0F1014] relative flex-grow flex ml-0 text-white ">
       <video
