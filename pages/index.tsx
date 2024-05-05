@@ -25,6 +25,7 @@ export default function Home() {
         <div className="flex flex-col gap-10">
           <MovieList title="Trending Now" data={movie} />
           <MovieList title="Favorites" data={favorites} />
+          <MovieList title="My Likes" data={favorites} />
         </div>
       </div>
     </div>
