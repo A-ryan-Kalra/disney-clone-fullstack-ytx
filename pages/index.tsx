@@ -24,7 +24,7 @@ export default function Home() {
         <Billboard />
         <div className="flex flex-col gap-10">
           <MovieList title="Trending Now" data={movie} />
-          <MovieList title="My Likes" data={favorites} />
+          <MovieList title="Favorites" data={favorites} />
         </div>
       </div>
     </div>
